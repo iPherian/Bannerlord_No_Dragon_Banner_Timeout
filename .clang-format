@@ -1,0 +1,4 @@
+Language: CSharp
+BasedOnStyle: LLVM
+BreakBeforeBraces: Allman
+NamespaceIndentation:  All
