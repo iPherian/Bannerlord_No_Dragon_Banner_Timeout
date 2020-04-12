@@ -13,7 +13,7 @@ You can add it to the game whenever you want. However, if the quests have alread
 
 You can get it from nexus: https://www.nexusmods.com/mountandblade2bannerlord/mods/370
 
-Or, if you're building it here, during post build, the Module directory will be mirrored to the Bannerlord module directory (`C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\NoDragonBannerTimeout`). It may be necessary to set the property `GameFolder` if Bannerlord is installed at a non-standard path.
+Or, if you're building it here, during post build, the NoDragonBannerTimeout directory will be mirrored to the Bannerlord module directory (`C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\NoDragonBannerTimeout`). It may be necessary to set the property `GameFolder` in the *.csproj file if Bannerlord is installed at a non-standard path.
 
 ## Compatibility and Class Overrides:
 
