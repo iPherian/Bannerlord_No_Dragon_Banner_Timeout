@@ -3,7 +3,11 @@
 
 A King is never late, nor is he early. He arrives precisely when he means to!
 
-Now take as long as you want to form a Kingdom or do the Dragon Banner quests. They won't timeout saying "you took more than 10 years."
+Take as long as you want to form Kingdom, or do the Dragon Banner quests, Unify/Weaken Empire, Folly, or any main story quests. Now they won't fail saying "you couldn't complete the quest in 10 years", although it's actually about 835 days.
+
+# Usage
+
+You can add it to the game whenever you want. However, if the quests have already failed, it can't bring them back.
 
 # Installation
 
@@ -13,9 +17,7 @@ Or, if you're building it here, during post build, the Module directory will be 
 
 ## Compatibility and Class Overrides:
 
-You should add it to the game sometime before completion of the quest "Assemble the dragon banner". You can add it afterwards it just won't do anything.
-
-Is probably not compatible with mods that alter the dragon banner or folly quests.
+Is probably not compatible with mods that alter the main storyline quests.
 
 Alters the classes StoryMode.Behaviors.FirstPhaseCampaignBehavior in "Modules\StoryMode\bin\Win64_Shipping_Client\StoryMode.dll".
 
