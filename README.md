@@ -17,9 +17,11 @@ Or, if you're building it here, during post build, the NoDragonBannerTimeout dir
 
 ## Compatibility and Class Overrides:
 
-Is probably not compatible with mods that alter the main storyline quests.
+Is compatible with [Bannerlord Community Patch](https://www.nexusmods.com/mountandblade2bannerlord/mods/186).
 
-Alters the classes StoryMode.Behaviors.FirstPhaseCampaignBehavior in "Modules\StoryMode\bin\Win64_Shipping_Client\StoryMode.dll".
+Is probably not compatible with other mods that alter the main storyline quests.
+
+Alters the classes StoryMode.Behaviors.FirstPhaseCampaignBehavior in "Modules\StoryMode\bin\Win64_Shipping_Client\StoryMode.dll". Also modifies the 'time remaining' property of certain story line quests.
 
 # Credits
 
