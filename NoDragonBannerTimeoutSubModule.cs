@@ -47,9 +47,10 @@ namespace NoDragonBannerTimeout
       {
         // TODO: display a long lasting notification on screen, as these
         // information messages are sometimes drowned out amongst many others.
-        DisplayInfoMsgQuestModifyFailureUserShouldReport(
+        string errorMsg = MakeMsgQuestModifyFailureUserShouldReport(
             "Behavior container is wrong type");
-        return;
+        LogError(errorMsg);
+        throw new NoDragonBannerTimeoutLoadError(errorMsg);
       }
 
       bool found = false;
@@ -64,8 +65,11 @@ namespace NoDragonBannerTimeout
       }
       if (!found)
       {
-        DisplayInfoMsgQuestModifyFailureUserShouldReport(
+        string errorMsg = MakeMsgQuestModifyFailureUserShouldReport(
             "Vanilla quest behavior not found");
+        LogError(errorMsg);
+        throw new NoDragonBannerTimeoutNotLoadedAfterStoryModeException(
+            errorMsg);
       }
     }
 
@@ -164,25 +168,69 @@ namespace NoDragonBannerTimeout
       InitDisableStoryDirectTimeout(game);
     }
 
+    public static string
+    MakeMsgQuestModifyFailureUserShouldReport(string baseMsg) =>
+        MakeMsgUserShouldReport(
+            "Could not disable timeout on early story quests: " + baseMsg +
+            ".");
+
+    public static string MakeMsgUserShouldReport(string baseMsg) =>
+        MODULE_NAME + ": " + baseMsg +
+        " Please report this problem on nexus mods page.";
+
     public static void DisplayInfoMsg(string msg)
     {
       InformationManager.DisplayMessage(new InformationMessage(msg));
     }
 
+    public static void LogError(string msg)
+    {
+      DisplayInfoMsg(msg);
+      Debugger.Log(3, nameof(NoDragonBannerTimeoutSubModule), msg + "\n");
+      MBDebug.ConsolePrint(msg);
+    }
+
     public static void DisplayInfoMsgUserShouldReport(string msg)
     {
-      string finalMsg = MODULE_NAME + ": " + msg +
-                        " Please report this problem on nexus mods page.";
-      DisplayInfoMsg(finalMsg);
-      Debugger.Log(3, nameof(NoDragonBannerTimeoutSubModule), finalMsg + "\n");
-      MBDebug.ConsolePrint(finalMsg);
+      LogError(MakeMsgUserShouldReport(msg));
     }
 
     public static void
     DisplayInfoMsgQuestModifyFailureUserShouldReport(string msg)
     {
-      DisplayInfoMsgUserShouldReport(
-          "Could not disable timeout on early story quests: " + msg + ".");
+      LogError(MakeMsgQuestModifyFailureUserShouldReport(msg));
+    }
+  }
+
+  public class NoDragonBannerTimeoutNotLoadedAfterStoryModeException : Exception
+  {
+    public NoDragonBannerTimeoutNotLoadedAfterStoryModeException() {}
+
+    public NoDragonBannerTimeoutNotLoadedAfterStoryModeException(string msg)
+        : base(MakeMsg(msg))
+    {
+    }
+
+    public NoDragonBannerTimeoutNotLoadedAfterStoryModeException(
+        string msg, Exception inner)
+        : base(MakeMsg(msg), inner)
+    {
+    }
+
+    private static string MakeMsg(string msg) =>
+        msg +
+        " This is usually because this mod wasn't loaded after StoryMode.";
+  }
+
+  public class NoDragonBannerTimeoutLoadError : Exception
+  {
+    public NoDragonBannerTimeoutLoadError() {}
+
+    public NoDragonBannerTimeoutLoadError(string message) : base(message) {}
+
+    public NoDragonBannerTimeoutLoadError(string message, Exception inner)
+        : base(message, inner)
+    {
     }
   }
 }
