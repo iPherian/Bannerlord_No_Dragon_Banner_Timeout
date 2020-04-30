@@ -2,9 +2,11 @@
 using StoryMode.StoryModePhases;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Engine;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 
@@ -169,15 +171,18 @@ namespace NoDragonBannerTimeout
 
     public static void DisplayInfoMsgUserShouldReport(string msg)
     {
-      DisplayInfoMsg(MODULE_NAME + ": " + msg +
-                     " Please report this problem on nexus mods page.");
+      string finalMsg = MODULE_NAME + ": " + msg +
+                        " Please report this problem on nexus mods page.";
+      DisplayInfoMsg(finalMsg);
+      Debugger.Log(3, nameof(NoDragonBannerTimeoutSubModule), finalMsg + "\n");
+      MBDebug.ConsolePrint(finalMsg);
     }
 
     public static void
     DisplayInfoMsgQuestModifyFailureUserShouldReport(string msg)
     {
       DisplayInfoMsgUserShouldReport(
-          "Could not alter Dragon Banner quest: " + msg + ".");
+          "Could not disable timeout on early story quests: " + msg + ".");
     }
   }
 }
